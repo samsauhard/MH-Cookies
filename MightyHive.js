@@ -1,6 +1,8 @@
 var red = 0;
 var blue = 0;
 
+
+
 function changeColor() {  
     
 if(document.cookie.indexOf('color=')==-1)
@@ -25,10 +27,20 @@ else
 	var decodedCookie = document.cookie.split(";");
 	cookiearray = decodedCookie[0].split('=');
 	var valueColor = cookiearray[1];
-	var cookiearraycount = decodedCookie[1].split('=');
-	var valueCount = parseInt(cookiearraycount[1]);
-	var mcount = valueCount+1;
-	document.cookie = "count=" + mcount.toString(); 
+	
+	
+	try {
+		var cookiearraycount = decodedCookie[1].split('=');
+	 	var valueCount = parseInt(cookiearraycount[1]);
+		var mcount = valueCount+1;
+		document.cookie = "count=" + mcount.toString(); 
+		}
+	catch(err) {
+		document.cookie = "color=" + valueColor;
+  		document.cookie = "count=1";
+		mcount=1;
+		}
+	
 	document.getElementById("text").innerHTML = "Your Color is " + valueColor + "<br/>" + "This is your " + mcount.toString() +" visit.";	
 	set(valueColor);    
 }
